@@ -15,7 +15,7 @@ jobs:
       - run: docker build -t laurabur/multi-server ./server
       - run: docker build -t laurabur/multi-worker ./worker
 
-      - run: docker push laurabur/multi-worker ./client
-      - run: docker push laurabur/multi-worker ./nginx
-      - run: docker push laurabur/multi-worker ./server
-      - run: docker push laurabur/multi-worker ./worker
+      - run: docker push laurabur/multi-client
+      - run: docker push laurabur/multi-nginx
+      - run: docker push laurabur/multi-server
+      - run: docker push laurabur/multi-worker
