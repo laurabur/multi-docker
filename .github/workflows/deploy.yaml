@@ -1,0 +1,21 @@
+name: Push Docker images
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      - run: docker build -t laurabur/multi-client ./client
+      - run: docker build -t laurabur/multi-nginx ./nginx
+      - run: docker build -t laurabur/multi-server ./server
+      - run: docker build -t laurabur/multi-worker ./worker
+
+      - run: docker push laurabur/multi-worker ./client
+      - run: docker push laurabur/multi-worker ./nginx
+      - run: docker push laurabur/multi-worker ./server
+      - run: docker push laurabur/multi-worker ./worker
